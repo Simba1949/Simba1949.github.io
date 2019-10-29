@@ -10,4 +10,5 @@
 
  Multiple themes 
 
-[GitHub](https://github.com/docsifyjs/docsify/) [Get Started](/)
+[GitHub](https://github.com/docsifyjs/docsify/) [Get Started](/docs/Tool/Docsify和Github&Nginx部署博客书.md)
+
