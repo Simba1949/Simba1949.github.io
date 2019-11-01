@@ -46,7 +46,7 @@ yum -y install zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-devel
 
 libfastcommon是FastDFS官方提供的，libfastcommon包含了FastDFS运行所需要的一些基础库。
 
- 下载地址：https://sourceforge.net/projects/libfastcommon/ 
+ 下载地址：https://github.com/happyfish100/libfastcommon/releases
 
 ```shell
 # 可以通过上面下载链接下载上传，或者通过 wget 方式下载
