@@ -79,6 +79,17 @@ cd /usr/local/redis/bin
 ./redis-server redis.conf
 ```
 
+### redis.conf 设置
+```
+#  搜索 bind 127.0.0.1，注释 bind 127.0.0.1 即可远程登录访问
+#  搜索 daemonize ，设置为 daemonize yes 即可后台访问
+#  搜索 # requirepass foobared，去掉注释，foobared 为默认密码，可以设置其他密码
+## 最终效果如下
+# bind 127.0.0.1
+daemonize yes
+requirepass redisPassword
+```
+
 ### Redis-cli 启动验证
 
 ```shell
