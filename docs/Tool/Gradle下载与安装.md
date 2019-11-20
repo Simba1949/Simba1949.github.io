@@ -17,6 +17,10 @@ linux.centos=7
 * Gradle 官网下载地址： https://gradle.org/releases/
 * SDK 官网： https://sdkman.io/
 
+## 环境准备
+
+需要安装 JDK 环境
+
 ## Windows 安装
 
 下载并解压
