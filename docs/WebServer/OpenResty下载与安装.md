@@ -54,9 +54,9 @@ make install
 ### 运行
 
 ```shell
-# 方式一：进入 bin 目录，执行
+# 方式一：进入 openresty安装目录/bin 目录，执行
 ./openresty
-# 方式二：进入 openresty/nginx/sbin 目录，执行
+# 方式二：进入 openresty安装目录/nginx/sbin 目录，执行
 ./nginx
 ```
 
@@ -76,6 +76,17 @@ sudo yum-config-manager --add-repo https://openresty.org/package/centos/openrest
 sudo yum install -y openresty
 # 更新
 sudo yum check-update
+```
+
+注：默认安装目录：`/usr/local/openresty`
+
+### 运行
+
+```shell
+# 方式一：进入 openresty安装目录/bin 目录，执行
+./openresty
+# 方式二：进入 openresty安装目录//nginx/sbin 目录，执行
+./nginx
 ```
 
 ### 安装 OpenResty 命令工具
