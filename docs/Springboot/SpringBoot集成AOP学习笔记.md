@@ -7,7 +7,7 @@
 版本说明
 
 ```properties
-
+spring.boot=2.2.3.RELEASE
 ```
 
 相关链接
@@ -28,6 +28,15 @@
 * afterThrowing ：异常通知
 
 ## 实战演练
+
+### pom.xml
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+```
 
 ### Controller
 
