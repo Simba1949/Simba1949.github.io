@@ -25,7 +25,6 @@
         <guava.version>28.2-jre</guava.version>
         <!--https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
         <hutool-all.version>5.1.3</hutool-all.version>
-        <maven-compiler-plugin.version></maven-compiler-plugin.version>
     </properties>
 
     <!--spring-boot 和 spring-cloud 版本兼容参考 https://spring.io/projects/spring-cloud -->
