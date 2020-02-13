@@ -12,34 +12,37 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.simba1949</groupId>
-    <artifactId>spring-security-learn</artifactId>
+    <artifactId>netty-learn</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <finalName.text>project-final-name</finalName.text>
+        <!--https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+        <spring-cloud-dependencies.version>Hoxton.RELEASE</spring-cloud-dependencies.version>
+        <!--https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <fastjson.version>1.2.62</fastjson.version>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-        <commons-lang3.version>3.9</commons-lang3.version>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
-        <commons-collections4.version>4.4</commons-collections4.version>
-        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-        <hutool-all.version>5.0.7</hutool-all.version>
+        <!--https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <guava.version>28.2-jre</guava.version>
+        <!--https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+        <hutool-all.version>5.1.3</hutool-all.version>
+        <maven-compiler-plugin.version></maven-compiler-plugin.version>
     </properties>
+
+    <!--spring-boot 和 spring-cloud 版本兼容参考 https://spring.io/projects/spring-cloud -->
+    <!-- Inherit defaults from Spring Boot -->
+    <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+    </parent>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>Cairo-SR7</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.SR4</version>
+                <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -47,7 +50,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!--spring boot starter : Core starter, including auto-configuration support, logging and YAML-->
+        <!--Core starter, including auto-configuration support, logging and YAML-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -57,18 +60,23 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
         </dependency>
-        <!--actuator-->
+        <!--Starter for using Spring Boot's Actuator which provides production ready features to help you monitor and manage your application-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- springboot test -->
+        <!--Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--spring-boot-devtools-->
+        <!--Spring Boot Configuration Processor-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!--Spring Boot Developer Tools-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -76,15 +84,10 @@
         </dependency>
 
         <!--Common tools starter-->
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <!--lombok-->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool-all.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -92,53 +95,39 @@
             <version>${fastjson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${commons-collections4.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool-all.version}</version>
         </dependency>
         <!--Common tools end -->
-
-
     </dependencies>
 
     <build>
-        <defaultGoal>install</defaultGoal>
-        <finalName>spring-security-learn</finalName>
+        <finalName>${finalName.text}</finalName>
         <plugins>
-            <!--compiler plugin-->
+            <!--The Compiler Plugin is used to compile the sources of your project.-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!--the plugin of resources copy-->
+            <!--The Resources Plugin handles the copying of project resources to the output directory. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!--打包插件-->
+            <!--Spring Boot Maven Plugin-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -147,14 +136,22 @@
                     <!--<mainClass>top.simba1949.Application</mainClass>-->
                     <!-- 如果没有该配置，devtools不会生效 -->
                     <fork>true</fork>
+                    <skip>true</skip>
                     <!--将项目注册到linux服务上，可以通过命令开启、关闭以及伴随开机启动等功能-->
                     <executable>true</executable>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+            <!--Maven Surefire MOJO in maven-surefire-plugin.-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
                 <configuration>
                     <!--跳过测试-->
                     <skipTests>true</skipTests>
