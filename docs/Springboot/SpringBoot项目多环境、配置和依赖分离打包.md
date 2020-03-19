@@ -383,3 +383,9 @@ clean compile package install -P test
 clean compile package install -P prod
 ```
 
+### 运行命令
+
+```
+java -jar -Dloader.path=lib spring-boot-package-project.jar
+```
+
