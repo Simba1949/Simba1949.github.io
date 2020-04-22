@@ -178,6 +178,7 @@ public class UserController {
 ```java
 package top.simba1949.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -187,6 +188,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * 该配置用于获取 RequestParam或者PathVariable 时的日期、时间参数
+ *
  * @Author Theodore
  * @Date 2020/1/19 10:27
  */
@@ -199,6 +202,9 @@ public class LocalDateTimeConfig {
         return new Converter<String, LocalDateTime>() {
             @Override
             public LocalDateTime convert(String s) {
+                if (StringUtils.isBlank(s)){
+                    return null;
+                }
                 // 时间格式化
                 // 创建格式化/解析模板
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -208,12 +214,15 @@ public class LocalDateTimeConfig {
             }
         };
     }
-    
+
     @Bean
     public Converter<String, LocalDate> localDateConverter() {
         return new Converter<String, LocalDate>() {
             @Override
             public LocalDate convert(String s) {
+                if (StringUtils.isBlank(s)){
+                    return null;
+                }
                 // 时间格式化
                 // 创建格式化/解析模板
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -229,6 +238,9 @@ public class LocalDateTimeConfig {
         return new Converter<String, LocalTime>(){
             @Override
             public LocalTime convert(String s) {
+                if (StringUtils.isBlank(s)){
+                    return null;
+                }
                 // 时间格式化
                 // 创建格式化/解析模板
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -238,7 +250,6 @@ public class LocalDateTimeConfig {
             }
         };
     }
-
 }
 ```
 
