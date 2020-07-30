@@ -14,19 +14,19 @@
 <properties>
     <!--spring-boot 和 spring-cloud 版本兼容参考 https://spring.io/projects/spring-cloud -->
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-    <spring-boot-dependencies.version>2.2.5.RELEASE</spring-boot-dependencies.version>
+    <spring-boot-dependencies.version>2.2.9.RELEASE</spring-boot-dependencies.version>
     <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-    <spring-cloud-dependencies.version>Hoxton.RELEASE</spring-cloud-dependencies.version>
+    <spring-cloud-dependencies.version>Hoxton.SR6</spring-cloud-dependencies.version>
 
     <!-- the project final name -->
     <project.final.name>spring-boot-learn</project.final.name>
 
     <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-    <fastjson.version>1.2.62</fastjson.version>
+    <fastjson.version>1.2.73</fastjson.version>
     <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-    <guava.version>28.2-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-    <hutool-all.version>5.1.3</hutool-all.version>
+    <hutool-all.version>5.3.10</hutool-all.version>
 </properties>
 
 <dependencyManagement>
