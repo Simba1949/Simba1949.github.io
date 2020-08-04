@@ -9,60 +9,39 @@
 * guava ：https://mvnrepository.com/artifact/com.google.guava/guava
 * hutool-all ：https://mvnrepository.com/artifact/cn.hutool/hutool-all
 
-```xml
+## SprinBoot项目基础依赖
 
+```xml
 <properties>
     <!--spring-boot 和 spring-cloud 版本兼容参考 https://spring.io/projects/spring-cloud -->
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
-    <spring-boot-dependencies.version>2.2.9.RELEASE</spring-boot-dependencies.version>
-    <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-    <spring-cloud-dependencies.version>Hoxton.SR6</spring-cloud-dependencies.version>
-
-    <!-- the project final name -->
-    <project.final.name>spring-boot-learn</project.final.name>
-
-    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-    <fastjson.version>1.2.73</fastjson.version>
-    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-    <guava.version>29.0-jre</guava.version>
-    <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-    <hutool-all.version>5.3.10</hutool-all.version>
+    <main.class>top.simba1949.Application</main.class>
 </properties>
 
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <!-- Import dependency management from Spring Boot -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>${spring-boot-dependencies.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>${spring-cloud-dependencies.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
+<!-- 
+    Inherit defaults from Spring Boot
+    参考链接：https://docs.spring.io/spring-boot/docs/2.3.2.RELEASE/maven-plugin/reference/html/#using
+        Maven 用户可以从 spring-boot-starter-parent 项目继承以获得合理的默认值。父项目提供以下功能：
+        1.Java 1.8 是默认的编译器级别。
+        2.UTF-8 源编码。
+        3.从 spring-boot-dependenciesPOM 继承的依赖性管理部分，用于管理常见依赖性的版本。
+        4.具有执行ID 的 repackage 目标的 repackage 执行。
+    -->
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.9.RELEASE</version>
+</parent>
 
 <dependencies>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
+    <!-- spring-boot basic starter-->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-configuration-processor</artifactId>
+        <optional>true</optional>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -70,81 +49,40 @@
         <scope>runtime</scope>
         <optional>true</optional> <!-- 表示依赖不会传递 -->
     </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <!-- spring-boot basic end-->
 
-    <!--Common tools starter-->
-    <!--lombok-->
+    <!-- tools starter-->
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
     </dependency>
+    <!-- tools end-->
+
     <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>fastjson</artifactId>
-        <version>${fastjson.version}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>cn.hutool</groupId>
-        <artifactId>hutool-all</artifactId>
-        <version>${hutool-all.version}</version>
-    </dependency>
-    <!--Common tools end -->
 </dependencies>
 
 <build>
-    <finalName>${project.final.name}</finalName>
     <plugins>
-        <!--The Compiler Plugin is used to compile the sources of your project.-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-        <!--The Resources Plugin handles the copying of project resources to the output directory.-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <configuration>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
-        <!--Spring Boot Maven Plugin-->
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
                 <!--main of springboot project-->
-                <!--<mainClass>top.simba1949.Application</mainClass>-->
+                <mainClass>${main.class}</mainClass>
                 <!-- 如果没有该配置，devtools不会生效 -->
                 <fork>true</fork>
                 <!--将项目注册到linux服务上，可以通过命令开启、关闭以及伴随开机启动等功能-->
                 <executable>true</executable>
             </configuration>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                </execution>
-            </executions>
         </plugin>
-        <!--Maven Surefire MOJO in maven-surefire-plugin.-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-                <!--跳过测试-->
-                <skipTests>true</skipTests>
-            </configuration>
-        </plugin>
-        <!-- docker的maven插件，详情请见 https://blog.csdn.net/SIMBA1949/article/details/83064083-->
     </plugins>
 
     <!--IDEA是不会编译src的java目录的文件，如果需要读取，则需要手动指定哪些配置文件需要读取-->
@@ -163,5 +101,11 @@
         </resource>
     </resources>
 </build>
+```
+
+## SpringCloud项目基础依赖
+
+```xml
+
 ```
 
